@@ -1,4 +1,5 @@
 import { showAlert } from "@/Components/AlertManager";
+import { showToast } from "@/Components/CustomToast";
 import { NavigationProp } from "@react-navigation/native";
 import { View, Text, Button } from "react-native";
 
@@ -7,7 +8,7 @@ export default function HomeScreen({
 }: {
   navigation: NavigationProp<any>;
 }) {
-  const handlePress = () => {
+  const showCustomAlert = () => {
     showAlert({
       message: "Are you sure you want to continue?",
 
@@ -25,7 +26,8 @@ export default function HomeScreen({
       <Text>This is the Home Screen</Text>
       <Button
         // onPress={() => navigation.navigate("Settings")}
-        onPress={handlePress}
+        // onPress={showCustomAlert}
+        onPress={() => showToast("Hello, this is a toast message!")}
         title="Goto Settings"
       />
     </View>
