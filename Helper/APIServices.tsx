@@ -1,9 +1,15 @@
 import { PostModel } from "@/Model/PostModel";
 import api from "./NetworkManager";
+import NetInfo from "@react-native-community/netinfo";
 
 export const fetchUserData = async (
   userId: string
 ): Promise<PostModel | null> => {
+  const netInfo = await NetInfo.fetch();
+  if (!netInfo.isConnected) {
+    console.error("No internet connection");
+    return null; // Handle no internet connection
+  }
   try {
     const response = await api.get(`posts/${userId}`);
     return response.data as PostModel; // validate structure here

@@ -5,7 +5,12 @@ import axios from "axios";
 const api = axios.create({
   baseURL: BASE_URL,
   timeout: TIMEOUT,
+  headers: {
+    "Content-Type": CONTENT_TYPE,
+  },
 });
+
+
 
 // Request interceptor with full logging
 api.interceptors.request.use(
