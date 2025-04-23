@@ -1,8 +1,6 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import HomeScreen from "./HomeScreen";
-import SettingsScreen from "./SettingScreen";
-import { TouchableOpacity, Text } from "react-native";
+import HomeScreen from "./HomeNavigatorScreens/HomeScreen";
 import { NavigationProp } from "@react-navigation/native";
 
 const Drawer = createDrawerNavigator();

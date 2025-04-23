@@ -25,7 +25,7 @@ export default function HomeScreen({
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>This is the Home Screen</Text>
       <Button
-        onPress={() => navigation.navigate("Settings")}
+        onPress={() => navigation.navigate("Setting")}
         // onPress={showCustomAlert}
         // onPress={() => showToast("Hello, this is a toast message!")}
         title="Goto Settings"
