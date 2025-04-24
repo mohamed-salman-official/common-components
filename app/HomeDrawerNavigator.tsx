@@ -2,6 +2,7 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeScreen from "./HomeNavigatorScreens/HomeScreen";
 import { NavigationProp } from "@react-navigation/native";
+import BottomTabNavigator from "./BottomTabNavigator";
 
 const Drawer = createDrawerNavigator();
 
@@ -11,10 +12,7 @@ export default function HomeDrawerNavigator({
   navigation: NavigationProp<any>;
 }) {
   return (
-    <Drawer.Navigator
-      initialRouteName="Home"
-      screenOptions={{ headerShown: false }}
-    >
+    <Drawer.Navigator screenOptions={{ headerShown: false }}>
       <Drawer.Screen
         name="Home"
         component={HomeScreen}
