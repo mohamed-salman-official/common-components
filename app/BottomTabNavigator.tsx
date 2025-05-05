@@ -11,7 +11,7 @@ const tabBar = createBottomTabNavigator();
 export default function BottomTabNavigator() {
   return (
     <tabBar.Navigator
-      initialRouteName="Home"
+      initialRouteName="HomeDrawer"
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarStyle: {
@@ -40,7 +40,7 @@ export default function BottomTabNavigator() {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <tabBar.Screen name="Home" component={HomeDrawerNavigator} />
+      <tabBar.Screen name="HomeDrawer" component={HomeDrawerNavigator} />
       <tabBar.Screen
         name="Order"
         component={OrderScreen}
