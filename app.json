@@ -12,7 +12,8 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "We use your location to enhance your experience.",
-        "NSPhotoLibraryUsageDescription": "Access is needed to choose photos from your library."
+        "NSPhotoLibraryUsageDescription": "Access is needed to choose photos from your library.",
+        "NSUserNotificationUsageDescription": "This app uses notifications to keep you updated."
       }
     },
     "android": {
@@ -32,6 +33,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "expo-notifications",
       "expo-router",
       [
         "expo-splash-screen",

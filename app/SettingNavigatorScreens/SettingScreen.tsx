@@ -7,8 +7,10 @@ import {
 import { PostData } from "@/Model/PostModel";
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, SafeAreaView, Button } from "react-native";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 export default function SettingsScreen() {
+  const tabBarHeight = useBottomTabBarHeight();
   const [posts, setPosts] = useState<PostData[]>([]);
   const [isNetworkChecked, setIsNetworkChecked] = useState(false);
 
@@ -65,6 +67,11 @@ export default function SettingsScreen() {
               <Text>{item.body}</Text>
             </View>
           )}
+          contentContainerStyle={{ paddingBottom: tabBarHeight }}
+          scrollIndicatorInsets={{
+            bottom: 100, // Keeps scrollbar visible above tab bar
+          }}
+          showsVerticalScrollIndicator={true}
         />
       )}
     </SafeAreaView>
