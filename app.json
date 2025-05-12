@@ -33,6 +33,13 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.yourapp",
+          "enableGooglePay": false
+        }
+      ],
       "expo-notifications",
       "expo-router",
       [

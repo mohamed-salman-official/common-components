@@ -1,6 +1,7 @@
 import { PostModel } from "@/Model/PostModel";
 import api from "./NetworkManager";
 import NetInfo from "@react-native-community/netinfo";
+import { STRIPE_API_URL, STRIPE_SECRET } from "@/Utils/Constant";
 
 export const fetchUserData = async (
   userId: string
@@ -22,6 +23,22 @@ export const fetchUserData = async (
 export const createUser = async (userData: any) => {
   try {
     const response = await api.post("/users", userData);
+    return response.data;
+  } catch (error) {
+    console.error("POST API Error:", error);
+    throw error; // Proper error bubbling for calling component
+  }
+};
+
+export const paymentIntent = async (userData: any) => {
+  try {
+    const response = await api.post(STRIPE_API_URL, userData, {
+      baseURL: "",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${STRIPE_SECRET}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("POST API Error:", error);

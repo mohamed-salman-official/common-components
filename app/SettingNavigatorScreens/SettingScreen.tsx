@@ -68,10 +68,6 @@ export default function SettingsScreen() {
             </View>
           )}
           contentContainerStyle={{ paddingBottom: tabBarHeight }}
-          scrollIndicatorInsets={{
-            bottom: 100, // Keeps scrollbar visible above tab bar
-          }}
-          showsVerticalScrollIndicator={true}
         />
       )}
     </SafeAreaView>

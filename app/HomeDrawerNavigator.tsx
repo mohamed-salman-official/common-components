@@ -2,7 +2,6 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeScreen from "./HomeNavigatorScreens/HomeScreen";
 import { NavigationProp } from "@react-navigation/native";
-import BottomTabNavigator from "./BottomTabNavigator";
 
 const Drawer = createDrawerNavigator();
 
