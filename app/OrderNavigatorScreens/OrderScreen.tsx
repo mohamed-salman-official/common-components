@@ -3,6 +3,7 @@ import { View, Text, Button, Image } from "react-native";
 import VideoPlayer from "@/Components/VideoPlayerManager";
 import { MediaPickerManager } from "@/Components/MediaPickerManager";
 import AudioPlayer from "@/Components/AudioPlayerManager";
+import VideoScreen from "@/Components/ExpoVedioPlayerManager";
 
 export default function OrderScreen() {
   const [imageUri, setImageUri] = useState<string | null>(null);
@@ -61,6 +62,20 @@ export default function OrderScreen() {
       <Text style={{ fontSize: 20, marginTop: 20 }}>Audio Player</Text>
       {audioUri && <AudioPlayer uri={audioUri} />}
       <Button title="Pick Audio File" onPress={handlePickAudio} />
+      <View
+        style={{
+          marginTop: 20,
+          height: 250,
+          width: "100%",
+          backgroundColor: "black",
+        }}
+      >
+        <Text style={{ fontSize: 20, marginTop: 10, color: "white" }}>
+          Expo Video Player
+        </Text>
+
+        <VideoScreen />
+      </View>
     </View>
   );
 }
