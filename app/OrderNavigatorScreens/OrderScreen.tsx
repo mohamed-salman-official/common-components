@@ -1,76 +1,66 @@
 import React, { useState } from "react";
-import { View, Text, Button, Image, Alert } from "react-native";
-import * as ImagePicker from "expo-image-picker";
+import { View, Text, Button, Image } from "react-native";
+import VideoPlayer from "@/Components/VideoPlayerManager";
+import { MediaPickerManager } from "@/Components/MediaPickerManager";
+import AudioPlayer from "@/Components/AudioPlayerManager";
 
 export default function OrderScreen() {
-  const [selectedMedia, setSelectedMedia] = useState<any>(null);
+  const [imageUri, setImageUri] = useState<string | null>(null);
+  const [videoUri, setVideoUri] = useState<string | null>(null);
+  const [audioUri, setAudioUri] = useState<string | null>(null);
 
-  const requestLibraryPermissions = async () => {
-    const mediaLib = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (mediaLib.status !== "granted") {
-      Alert.alert("Permissions required", "Please enable gallery permissions.");
-      return false;
-    }
-    return true;
-  };
-
-  const requestCameraPermissions = async () => {
-    const camera = await ImagePicker.requestCameraPermissionsAsync();
-
-    if (camera.status !== "granted") {
-      Alert.alert("Permissions required", "Please enable camera permissions.");
-      return false;
-    }
-    return true;
-  };
-
-  const pickMedia = async () => {
-    const hasPermission = await requestLibraryPermissions();
-    if (!hasPermission) return;
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      quality: 1,
-    });
-    if (!result.canceled) {
-      setSelectedMedia(result.assets[0]);
+  const handlePickImage = async () => {
+    const image = await MediaPickerManager.pickImageFromLibrary();
+    if (image) {
+      console.log("Image URI:", image.uri);
+      setImageUri(image.uri);
     }
   };
 
-  const takePhoto = async () => {
-    const hasPermission = await requestCameraPermissions();
-    if (!hasPermission) return;
+  const handleCaptureImage = async () => {
+    const camera = await MediaPickerManager.pickImageFromCamera();
+    if (camera) {
+      console.log("Captured Image URI:", camera.uri);
+      setImageUri(camera.uri);
+    }
+  };
 
-    const result = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      quality: 1,
-    });
+  const handlePickVideo = async () => {
+    const result = await MediaPickerManager.pickVideo();
+    if (result) {
+      console.log("Picked video URI:", result.uri);
+      setVideoUri(result.uri);
+    }
+  };
 
-    if (!result.canceled) {
-      setSelectedMedia(result.assets[0]);
+  const handlePickAudio = async () => {
+    const result = await MediaPickerManager.pickAudio();
+    if (result) {
+      console.log("Picked audio URI:", result.uri);
+      setAudioUri(result.uri);
     }
   };
 
   return (
     <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 20 }}>Order Screen</Text>
-
-      <Button title="Pick from Gallery" onPress={pickMedia} />
-      <Button title="Take Photo / Video" onPress={takePhoto} />
-
-      {selectedMedia && (
-        <View style={{ marginTop: 20 }}>
-          {selectedMedia.type === "image" ? (
-            <Image
-              source={{ uri: selectedMedia.uri }}
-              style={{ width: 200, height: 200 }}
-            />
-          ) : (
-            <Text>Video selected: {selectedMedia.uri}</Text>
-          )}
-        </View>
+      <Text style={{ fontSize: 20 }}>Images</Text>
+      {imageUri && (
+        <Image
+          source={{ uri: imageUri }}
+          resizeMode="stretch"
+          style={{ height: 250, width: "100%" }}
+        />
       )}
+      <Button title="Pick from Gallery" onPress={handlePickImage} />
+      <Button title="Take Photo / Video" onPress={handleCaptureImage} />
+
+      <Text style={{ fontSize: 20, marginTop: 20 }}>Media Player</Text>
+      {videoUri && <VideoPlayer uri={videoUri} />}
+      <Button title="Pick Video File" onPress={handlePickVideo} />
+
+      <Text style={{ fontSize: 20, marginTop: 20 }}>Audio Player</Text>
+      {audioUri && <AudioPlayer uri={audioUri} />}
+      <Button title="Pick Audio File" onPress={handlePickAudio} />
     </View>
   );
 }
